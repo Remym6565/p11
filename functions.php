@@ -43,6 +43,6 @@ add_action('wp_enqueue_scripts', 'enqueue_custom_script');
 
 function register_my_menu(){
     register_nav_menu('main', "Menu principal");
-    register_nav_menu('footer', "Menu pied de page");
+    register_nav_menu('footer', "Secondary Menu");
 }
 add_action('after_setup_theme', 'register_my_menu');
