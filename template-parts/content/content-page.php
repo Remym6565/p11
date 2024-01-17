@@ -23,7 +23,7 @@
 			<?php twenty_twenty_one_post_thumbnail(); ?>
 		</header><!-- .entry-header -->
 	<?php endif; ?>
-
+<h2>COUCOU home page</h2>
 	<div class="entry-content">
 		<?php
 		the_content();

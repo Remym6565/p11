@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template part for displaying posts
  *
@@ -11,34 +12,25 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article class='single_post' id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<header class="entry-header alignwide">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-		<?php twenty_twenty_one_post_thumbnail(); ?>
-	</header><!-- .entry-header -->
+	<div class="center">
+		<div class="main_post">
 
-	<div class="entry-content">
-		<?php
-		the_content();
+			<div class="description_post div1">
+				<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+				<p>Référence : <?= get_field('Référence') ?></p>
+				<p>Catégorie : <?= get_field('Catégorie') ?></p>
+				<p>Format : <?= get_field('Format') ?></p>
+				<p>Type : <?= get_field('type') ?></p>
+				<p>Année : <?= get_field('annee') ?></p>
+			</div>
 
-		wp_link_pages(
-			array(
-				'before'   => '<nav class="page-links" aria-label="' . esc_attr__( 'Page', 'twentytwentyone' ) . '">',
-				'after'    => '</nav>',
-				/* translators: %: Page number. */
-				'pagelink' => esc_html__( 'Page %', 'twentytwentyone' ),
-			)
-		);
-		?>
-	</div><!-- .entry-content -->
+			<div class='image_post div2'>
+				<?php twenty_twenty_one_post_thumbnail(); ?>
+			</div>
 
-	<footer class="entry-footer default-max-width">
-		<?php twenty_twenty_one_entry_meta_footer(); ?>
-	</footer><!-- .entry-footer -->
-
-	<?php if ( ! is_singular( 'attachment' ) ) : ?>
-		<?php get_template_part( 'template-parts/post/author-bio' ); ?>
-	<?php endif; ?>
+		</div>
+	</div>
 
 </article><!-- #post-<?php the_ID(); ?> -->

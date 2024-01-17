@@ -15,6 +15,7 @@
                 <!-- Logo -->
                 <a href="<?php echo home_url(); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Logo.png" alt="Logo Motaphoto" id="logo"></a>
                 <!-- Navigation -->
+                <?php if (!wp_is_mobile()):  ?>
                 <nav class="menudesktop">
                     <?php
                     wp_nav_menu(array(
@@ -23,12 +24,14 @@
                     ));
                     ?>
                 </nav>
+                <?php endif; ?>
                 <div class="menu-bars">
                 </div>
                 <div class="menu-close">
                 </div>
             </div>
         </div>
+        <?php if (wp_is_mobile()):  ?>
         <div class="menuburger">
             <?php
             wp_nav_menu(array(
@@ -36,7 +39,8 @@
                 'menu_id' => 'primary-menu',
             ));
             ?>
-        </div>
+        </div> 
+        <?php endif; ?>
         <?php if (is_front_page()) : ?>
             <div class="hero">
                 <h1>Photographe Event</h1>

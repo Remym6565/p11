@@ -1,4 +1,4 @@
-<div class="popup popup-overlay">
+<div class="popup-overlay">
     <div class="popup-contact">
         <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/Contact header.png'; ?>" class="popup-close">
         <?php

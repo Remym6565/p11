@@ -1,6 +1,22 @@
+#post-41 header,
+#post-11 header {
+    display: none;
+}
+
+
 /* HEADER */
 
+header {
+    box-shadow: 0px 4px 14px 10px #00000008;
+}
+
+#menu-item-50 {
+    padding-right: 0 !important;
+}
+
 a {
+    display: flex;
+    text-align: center;
     text-decoration: none;
 }
 
@@ -140,14 +156,19 @@ a {
 
 .popup-overlay {
     position: fixed;
-    /* width: 100%;
-    height: 100%; */
-    background: white;
-    display: flex;
+    height: 100%;
+    width: 100%;
+    background: #00000060;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 999;
-    top: 1em; 
+    top: 0;
+    margin: 0;
+}
+
+.popup {
+    display: flex !important;
 }
 
 .popup-close {
@@ -168,6 +189,8 @@ a {
     font-weight: normal;
     overflow: hidden;
     border: 5px solid !important;
+    background: white;
+    opacity: 1;
 }
 
 .wpcf7-spinner {
@@ -220,6 +243,172 @@ a {
 .wpcf7-form p label span input {
     border-radius: 8px;
     border: 1px solid #B8BBC2 !important;
+}
+
+
+/* TEMPLATE POST SINGLE */
+
+.center {
+    display: flex;
+    justify-content: center;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.main_post {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    max-width: 1440px;
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
+.div1 {
+    width: 50%;
+    
+}
+
+.div2 {
+    width: 50%;
+    
+}
+
+.post-thumbnail,
+.wp-post-image {
+    margin: 0;
+    margin-top: 2rem !important;
+}
+
+.description_post p {
+    font-family: Space Mono;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.description_post h1 {
+    max-width: 100%;
+    font-family: Space Mono;
+    font-style: italic;
+    font-size: 66px !important;
+    text-transform: uppercase;
+}
+
+.description_post {
+    padding-bottom: 30px;
+    margin-right: 30px;
+    border-bottom: 1px solid black;
+}
+
+.column_contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Poppins;
+    font-size: 14px;
+
+}
+
+.margin_right {
+    margin-right: 30px;
+}
+
+.button_contact {
+    width: 100%;
+    max-width: 272px;
+    background-color: #D8D8D8 !important;
+    font-family: Space Mono;
+    font-size: 12px;
+    color: black !important;
+    border-radius: 2px;
+
+}
+
+.block_link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1440px;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+.photos_apparentees h3 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: Space Mono;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.photos_apparentees {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1440px;
+    width: 100%;
+}
+
+.block_link {
+    height: 118px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: nowrap !important;
+    max-height: 40px;
+}
+
+.photo_previous a img , .photo_next a img{
+    width: 87px !important;
+    height: 71px !important;
+    background-size: cover !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.close {
+    display: none;
+}
+
+.column_nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 10px;
+}
+
+.nav-next {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-previous {
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+.nav-previous a img, .nav-next a img {
+    height: 8px;
+    width: 26px;
+}
+
+.nav-previous a, .nav-next a {
+    justify-content: center;
+}
+
+.post-navigation {
+    margin : 0;
 }
 
 
@@ -305,4 +494,94 @@ a {
     .wpcf7-form p label span textarea {
         width: 190px !important;
     }
+
+    #footer-menu li a {
+        justify-content: center;
+    }
+
+    .center {
+        margin-right: 60px;
+        margin-left: 60px;
+    }
+
+    .main_post {
+        flex-direction: column-reverse;
+    }
+
+    .div1,
+    .div2 {
+        width: 100%;
+        float: unset;
+    }
+
+    .column_contact {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .column_contact p {
+        margin-bottom: 15px;
+    }
+
+    .block_link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .post-thumbnail {
+        margin: 0 !important;
+    }
+
+    .description_post {
+        margin-right: 0px;
+        padding-top: 30px;
+        border-bottom: 0px;
+    }
+
+    .block_link {
+        height: auto;
+        border-bottom: 0px;
+        margin-top: 25px;
+    }
+
+    .border {
+        border-bottom: 2px solid black;
+    }
+
+    .margin_right {
+        margin-right: 0px;
+    }
+
+    .column_contact_main {
+        align-items: normal;
+    }
+
+    .column_contact {
+        margin-bottom: 25px;
+    }
+
+    .align_item_normal {
+        display: flex;
+        align-items: normal;
+    }
+
+    .align_item_center {
+        display: flex;
+        align-items: center;
+    }
+
+    .button_contact {
+        max-width: 100%;
+    }
+
+    .column_nav {
+        display: none;
+    }
+
+    .photos_apparentees {
+        justify-content: center;
+    }
+
 }
