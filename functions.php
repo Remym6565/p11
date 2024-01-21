@@ -29,7 +29,7 @@ add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 function theme_enqueue_styles()
 {
     wp_enqueue_style('theme-style', get_stylesheet_directory_uri() . '/style.css', array(), filemtime(get_stylesheet_directory() . '/style.css'));
-    wp_enqueue_style('font-style', get_stylesheet_directory_uri() . '/fonts.css' );
+    wp_enqueue_style('font-style', get_stylesheet_directory_uri() . '/fonts.css');
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 
@@ -37,12 +37,63 @@ add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 function enqueue_custom_script()
 {
     wp_enqueue_script('custom-script', get_stylesheet_directory_uri() . '/script.js');
+    wp_enqueue_script('ajax-script', get_stylesheet_directory_uri() . '/script-ajax.js');
+    wp_enqueue_script('jquery', get_template_directory_uri() . '/libs/jquery-3.7.1.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_script');
 
 
-function register_my_menu(){
+function register_my_menu()
+{
     register_nav_menu('main', "Menu principal");
     register_nav_menu('footer', "Secondary Menu");
 }
 add_action('after_setup_theme', 'register_my_menu');
+
+
+
+function blog_scripts()
+{
+    // Register the script
+    wp_register_script('custom-script', get_stylesheet_directory_uri() . '/js/custom.js', array('jquery'), false, true);
+
+    // Localize the script with new data
+    $script_data_array = array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'security' => wp_create_nonce('load_more_posts'),
+    );
+    wp_localize_script('custom-script', 'blog', $script_data_array);
+
+    // Enqueued script with localized data.
+    wp_enqueue_script('custom-script');
+}
+add_action('wp_enqueue_scripts', 'blog_scripts');
+
+
+add_action('wp_ajax_load_posts_by_ajax', 'load_posts_by_ajax_callback');
+add_action('wp_ajax_nopriv_load_posts_by_ajax', 'load_posts_by_ajax_callback');
+
+
+function load_posts_by_ajax_callback()
+{
+    check_ajax_referer('load_more_posts', 'security');
+    $paged = $_POST['page'];
+    $args = array(
+        'post_type' => 'photo',
+        'post_status' => 'publish',
+        'posts_per_page' => '8',
+        'paged' => $paged,
+    );
+    $blog_posts = new WP_Query($args);
+?>
+ 
+    <?php if ($blog_posts->have_posts()) : ?>
+        <?php while ($blog_posts->have_posts()) : $blog_posts->the_post();
+            the_post_thumbnail();
+        ?>
+        <?php endwhile; ?>
+        <?php
+    endif;
+
+    wp_die();
+}
