@@ -14,8 +14,8 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-
-	<h2>content-page.php</h2>
+	<?php echo('content-page.php')?>
+	
 
 	<div class="center">
 		<div class="posts_homepage">
