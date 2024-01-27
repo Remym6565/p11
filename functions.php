@@ -86,13 +86,16 @@ function load_posts_by_ajax_callback()
     );
     $blog_posts = new WP_Query($args);
 ?>
- 
+
     <?php if ($blog_posts->have_posts()) : ?>
-        <?php while ($blog_posts->have_posts()) : $blog_posts->the_post();
-            the_post_thumbnail();
-        ?>
+        <?php while ($blog_posts->have_posts()) : $blog_posts->the_post(); ?>
+            <a href="<?php echo get_permalink(); ?>">
+                <?php
+                the_post_thumbnail();
+                ?>
+            </a>
         <?php endwhile; ?>
-        <?php
+<?php
     endif;
 
     wp_die();
