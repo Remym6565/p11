@@ -95,61 +95,29 @@ while (have_posts()) :
 				<div class="width1440">
 					<h3>Vous aimerez aussi</h3>
 					<div class="posts_homepage">
-						<?php
-						// $post_id = get_the_ID();
-						// $post = get_post($post_id);
-						// var_dump($post);
-						// // exit();
-						// $category = get_the_category($post_id)[0]->slug;
-						// $category = 'categorie_photos';
-						// $args = array(
-						// 	'post_type' => 'photo',
-						// 	'posts_per_page' => 2,
-						// 	'category_name' => $category,
-						// 'post__not_in' => array(get_the_ID()),
-						// );
-						?>
-
-
-
-						<?php
-						// $args_related_photos = array(
-						// 	'post_type' => 'photo',
-						// 	'posts_per_page' => 2,
-						// 	'orderby' => 'rand',
-						// 	'tax_query' => array(
-						// 		array(
-						// 			'taxonomy' => 'categorie',
-						// 			'field' => 'slug',
-						// 			// 'terms' => $current_category_slugs, // Utilise le slug de la catégorie de la photo actuelle
-						// 		),
-						// 	),
-						// );
-						// var_dump($args_related_photos);
-						?>
-
-
+						
 						<?php
 						$categories = get_the_terms(get_the_ID(), 'categorie_photos');
 						
-						$current_category_slugs = array(); // Initialise un tableau vide pour les slugs de catégorie.
-
+						$current_category_slugs = array(); 
 						if ($categories) {
-							// Parcourir les catégories et stocker leurs slugs dans le tableau.
 							foreach ($categories as $category) {
 								$current_category_slugs[] = $category->slug;
 							}
 						}
-						
+
+						$exclude_ids = array(get_the_ID());
+
 						$args_related_photos = array(
 							'post_type' => 'photo',
 							'posts_per_page' => 2,
+							'post__not_in' => $exclude_ids,
 							'orderby' => 'rand',
 							'tax_query' => array(
 								array(
 									'taxonomy' => 'categorie_photos',
 									'field' => 'slug',
-									'terms' => $current_category_slugs, // Utilise le slug de la catégorie de la photo actuelle
+									'terms' => $current_category_slugs,
 								),
 							),
 						);
@@ -173,157 +141,6 @@ while (have_posts()) :
 						<?php endif; ?>
 						<?php wp_reset_postdata(); ?>
 
-
-
-						
-
-
-						
-
-
-
-
-						<?php
-
-						// $category = get_the_category($post_id)[0]->slug;
-						// $category = 'motaconcert';
-						// $args = array(
-						// 	'post_type' => 'motaphotos',
-						// 	'posts_per_page' => 2,
-						// 	'category_name' => $category,
-						// 	'post__not_in' => array(get_the_ID()),
-						// );
-
-
-
-						// $category = get_field('motacategorie');	
-						// 	$terms = get_terms(array(
-						// 		'taxonomy'   => $category,
-						// 		'hide_empty' => false,
-						// 	));
-						// var_dump($taxonomy);
-						?>
-
-
-						<?php
-						// 1. On définit les arguments pour définir ce que l'on souhaite récupérer
-						// $args = array(
-						// 	'post_type' => 'motaphoto',
-						// 	'category_name' => '',
-						// 	'posts_per_page' => 3,
-						// );
-
-						// // 2. On exécute la WP Query
-						// $my_query = new WP_Query($args);
-
-						// // 3. On lance la boucle !
-						// if ($my_query->have_posts()) : while ($my_query->have_posts()) : $my_query->the_post();
-
-						// 		the_title();
-						// 		the_content();
-						// 		the_post_thumbnail();
-
-						// 	endwhile;
-						// endif;
-
-						// // 4. On réinitialise à la requête principale (important)
-						// wp_reset_postdata();
-						?>
-
-
-
-						<?php
-						// 1. On définit les arguments pour définir ce que l'on souhaite récupére
-						// $category = get_field('Catégories');	
-						// $terms = get_terms(array(
-						// 	'taxonomy'   => $category,
-						// 	'hide_empty' => false,
-						// ));
-						// var_dump($terms);
-
-						// $category = get_field('Catégories');
-						// var_dump($category);
-						// $args = array(
-						// 	'post_type' => 'photo',
-						// 	'category_name' => $category,
-						// 	'posts_per_page' => 2,
-						// );
-
-						// // 2. On exécute la WP Query
-						// $my_query = new WP_Query($args);
-
-						// // 3. On lance la boucle !
-						// if ($my_query->have_posts()) : while ($my_query->have_posts()) : $my_query->the_post();
-
-						// 		// the_title();
-						// 		// the_content();
-						// 		the_post_thumbnail();
-
-						// 	endwhile;
-						// endif;
-
-						// // 4. On réinitialise à la requête principale (important)
-						// wp_reset_postdata();
-						// 
-						?>
-
-						<?php
-						// $post_id = get_the_ID();
-						// $post = get_post($post_id);
-						// print_r(...) ou var_dump(...)
-						// exit();
-						// $category = get_the_category($post_id)[0]->slug;
-						// $category = 'concert';
-						// $args = array(
-						// 	'post_type' => 'photo',
-						// 	'posts_per_page' => 2,
-						// 	'category_name' => $category,
-						// 'post__not_in' => array(get_the_ID()),
-						// );
-
-						// $query = new WP_Query($args);
-
-						// if ($query->have_posts()) {
-						// 	while ($query->have_posts()) {
-						// 		$query->the_post();
-						// 
-						?>
-						<!-- // 		<div class="photos-catalogue">
-						// 			<img src="<?= get_field('affichage_photo') ?>" class="photo-catalogue photo-catalogue-overlay" alt="<?= get_the_title() ?>" data-url="<?= get_field('affichage_photo') ?>" data-reference="Réf. photo : <?= get_field('reference_photo') ?>" data-category="Catégorie : <?= get_the_category()[0]->name ?>" data-post-id="<?= get_the_ID() ?>">
-						// 			<div class="photo-detail-expand">
-						// 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/expand.png" class="photo-expand" alt="icon photo-expand">
-						// 				<p class="photo-expand-message">Agrandir cette photo</p>
-						// 			</div>
-						// 			<a href="<?= get_permalink() ?>" class="photo-detail-link">
-						// 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/eye-regular.png" class="photo-infolink" alt="icon photo-infolink">
-						// 				<p class="photo-infolink-message">Plus d'infos sur cette photo</p>
-						// 			</a>
-						// 		</div> -->
-						<?php
-						// 	}
-						// } else {
-						// 	echo 'Aucune autre photo trouvée dans cette catégorie.';
-						// }
-
-
-						// // Remettre les données du post principal
-						// wp_reset_postdata();
-
-						// // Compter le nombre total de photos dans la catégorie
-						// $total_photos_args = array(
-						// 	'post_type' => 'photos',
-						// 	'category_name' => $category,
-						// 	'post__not_in' => array(get_the_ID()),
-						// 	'fields' => 'ids',
-						// );
-
-						// $total_photos_query = new WP_Query($total_photos_args);
-						// $total_photos = $total_photos_query->found_posts;
-						// echo '</div>';
-						// if ($total_photos > 2) {
-						// 	echo '<button class="load-more-btn photos-container-btn" data-post-id="' . get_the_ID() . '">Toutes les photos</button>';
-						// }
-						?>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 window.addEventListener('DOMContentLoaded', function () {
 
+    
 
     // Menu burger
 
@@ -72,16 +73,19 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Single post : input ref photo
 
-    // const refphoto = document.getElementsByName('your-subject')[0];
+    
     let refvalue = document.getElementById('ref').innerHTML;
     refvalue = refvalue.split(':')[1].trim();
 
     const refphoto = document.querySelector('input[name="your-subject"]');
     refphoto.value = refvalue;
-    console.log(refphoto);
     
 
-    refphoto.setAttribute("value", "aaaa");
+
+    // Hover photo catalogue
+
+    const fullicon = document.querySelector('#full_icon');
+    console.log(fullicon);
 
 
 })

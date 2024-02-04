@@ -90,9 +90,29 @@ function load_posts_by_ajax_callback()
     <?php if ($blog_posts->have_posts()) : ?>
         <?php while ($blog_posts->have_posts()) : $blog_posts->the_post(); ?>
             <a href="<?php echo get_permalink(); ?>">
-                <?php
-                the_post_thumbnail();
-                ?>
+                <div class="photo-info">
+
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_fullscreen.png" alt="" id="full_icon">
+
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_eye.png" alt="" id="icon_eye">
+
+                    <div class="photo-info-leftandright">
+
+                        <div class="photo-info-left">
+                            <p><?php echo get_field('Référence'); ?></p>
+                        </div>
+                        <div class="photo-info-right">
+                            <p><?php echo get_field('Catégorie'); ?></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="background-black">
+                    <?php
+                    the_post_thumbnail();
+                    ?>
+                </div>
+
             </a>
         <?php endwhile; ?>
 <?php

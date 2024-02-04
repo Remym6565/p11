@@ -32,6 +32,9 @@ a {
     height: 14px;
     top: 31px;
     left: 146px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    animation: slideIn 2s ease, fadeIn 1s;
 }
 
 #topmenu {
@@ -45,6 +48,7 @@ a {
 
 #primary-menu {
     display: flex;
+    animation: slideInRight 2s ease, fadeIn 1s;
 }
 
 #primary-menu li {
@@ -58,8 +62,9 @@ a {
     text-decoration: none;
 }
 
-#primary-menu li :hover {
+#primary-menu li :hover, #footer-menu li :hover {
     color: #E00000;
+    transform: scale(1.1);
 }
 
 .menu-bars {
@@ -97,28 +102,6 @@ a {
 
 /* HERO */
 
-/* .hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('assets/images/nathalie-11.jpeg');
-    background-size: cover;
-    height: calc(100vh - 80px);
-    min-height: 210px;
-} */
-
-/* .hero h1 {
-    font-family: "Space Mono";
-    font-size: 96px;
-    text-align: center;
-    text-transform: uppercase;
-    font-style: italic;
-    font-weight: bold;
-    color: transparent;
-    -webkit-text-stroke: 3px #ffffff;
-    margin: auto;
-} */
-
 
 .hero img {
     display: flex;
@@ -133,7 +116,7 @@ a {
 
 
 .hero {
-    height: 962px;
+    max-height: calc(100vh - 80px);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -154,6 +137,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: fadeIn 2s, scaleIn 2s ease;
 }
 
 
@@ -213,6 +197,7 @@ a {
 
 .popup-close {
     margin-top: 8px;
+    animation: faqmove 20s linear infinite;
 }
 
 .popup-contact {
@@ -486,8 +471,8 @@ a {
     height: 495px !important;
     width: 550px !important;
     object-fit: cover !important;
-    margin-left: 15px;
-    margin-right: 15px;
+    /* margin-left: 15px;
+    margin-right: 15px; */
 }
 
 .blog-posts {
@@ -537,11 +522,12 @@ a {
     text-transform: uppercase;
 }
 
-option:checked, option:hover, option:focus {
+.filters-and-sort select option:checked,
+.filters-and-sort select option:hover,
+.filters-and-sort select option:focus {
     background-color: red;
     color: white;
 }
-
 
 
 #category-filter {
@@ -563,6 +549,155 @@ option:checked, option:hover, option:focus {
     justify-content: space-between;
 }
 
+
+
+/* HOVER PHOTO CATALOGUE */
+
+.photo-info {
+    position: absolute;
+    max-width: 550px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+}
+
+#icon_eye {
+    width: 46px !important;
+    height: 32px !important;
+    transition: .5s ease;
+    position: absolute;
+    top: 11em;
+}
+
+/* #icon_eye:hover {
+    transform: scale(2);
+} */
+
+#full_icon {
+    width: 46px !important;
+    height: 46px !important;
+    transition: .5s ease;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+.blog-posts a:hover .photo-info {
+    opacity: 1;
+}
+
+.photo-info-leftandright {
+    display: flex;
+    justify-content: space-between;
+    max-width: 500px;
+    width: 100%;
+    position: absolute;
+    top: 33em;
+    color: white;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.blog-posts a img:hover {
+    opacity: 0.25;
+}
+
+.background-black {
+    background-color: black !important;
+}
+
+.blog-posts a {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 30px;
+}
+
+.wp-post-image {
+    margin-top: 0 !important;
+}
+
+
+
+/* ANIMATIONS */
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(50%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+
+@keyframes faqmove {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes slideInBottom {
+    0% {
+        transform: translateY(50%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes scaleIn {
+    0% {
+        scale: 0.5;
+    }
+
+    100% {
+        scale: 1;
+    }
+}
+
+
+@keyframes scaleInDouble {
+    0% {
+        scale: 1;
+    }
+
+    100% {
+        scale: 2;
+    }
+}
 
 
 
@@ -623,8 +758,9 @@ option:checked, option:hover, option:focus {
     }
 
     .hero h1 {
-        font-size: 30px;
+        font-size: 45px;
         -webkit-text-stroke: 1px #ffffff;
+
     }
 
     #footer-menu {
@@ -775,5 +911,9 @@ option:checked, option:hover, option:focus {
     #category-filter,
     #date-sort {
         margin: 10px 0;
+    }
+
+    .photo-info {
+        display: none;
     }
 }

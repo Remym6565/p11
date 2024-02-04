@@ -40,8 +40,8 @@
 		<label for="date-sort"></label>
 		<select name="date-sort" id="date-sort">
 			<option value="ALL">TRIER PAR</option>
-			<option value="DESC">Du plus récent au plus ancien</option>
-			<option value="ASC">Du plus ancien au plus récent</option>
+			<option value="DESC">À partir des plus récentes</option>
+			<option value="ASC">À partir des plus anciennes</option>
 		</select>
 
 	</div>
@@ -55,12 +55,16 @@
 
 			<div class="">
 				<?php
+
 				$args = array(
 					'post_type' => 'photo',
 					'post_status' => 'publish',
 					'posts_per_page' => '8',
+					'orderby' => 'date',            
+					'order' => 'DESC',
 					'paged' => 1,
 				);
+				
 				$blog_posts = new WP_Query($args);
 				?>
 
@@ -68,10 +72,31 @@
 					<div class="blog-posts">
 						<?php while ($blog_posts->have_posts()) : $blog_posts->the_post(); ?>
 							<a href="<?php echo get_permalink(); ?>">
-								<?php
-								the_post_thumbnail();
-								?>
+								<div class="photo-info">
+
+									<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_fullscreen.png" alt="" id="full_icon">
+
+									<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_eye.png" alt="" id="icon_eye">
+
+									<div class="photo-info-leftandright">
+
+										<div class="photo-info-left">
+											<p><?php echo get_field('Référence'); ?></p>
+										</div>
+										<div class="photo-info-right">
+											<p><?php echo get_field('Catégorie'); ?></p>
+										</div>
+									</div>
+
+								</div>
+								<div class="background-black">
+									<?php
+									the_post_thumbnail();
+									?>
+								</div>
+
 							</a>
+
 						<?php endwhile; ?>
 					</div>
 					<div class="center">
