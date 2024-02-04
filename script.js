@@ -6,7 +6,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const menubars = document.querySelector('.menu-bars');
     const menuclose = document.querySelector('.menu-close');
-    const menuburger = document.querySelector('.menuburger');
+    const menuburger = document.querySelector('.menuburger');   
+
 
     menubars.addEventListener('click', () => {
         menuburger.classList.add('open');
@@ -84,8 +85,22 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Hover photo catalogue
 
-    const fullicon = document.querySelector('#full_icon');
-    console.log(fullicon);
+    // const fullicon = document.querySelector('#full_icon');
+    // console.log(fullicon);
+
+
+    // Lightbox (close)
+
+    const closecrosswhite = document.querySelector('.closecross');
+    const popupoverlaylightbox = document.querySelector('.popup-overlay-lightbox');
+    
+    console.log(closecrosswhite); 
+
+    // closecrosswhite.addEventListener('click', () => {
+    //     popupoverlaylightbox.classList.remove('open');
+        
+    // });
+    // console.log(closecrosswhite);
 
 
 })

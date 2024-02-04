@@ -20,6 +20,7 @@
 <footer id="footer" class="site-footer">
 
 	<?php get_template_part('template-parts/popup-contact'); ?>
+	<?php get_template_part('template-parts/lightbox'); ?>
 
 	<?php
 	wp_nav_menu(array(

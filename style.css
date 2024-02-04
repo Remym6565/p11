@@ -62,7 +62,8 @@ a {
     text-decoration: none;
 }
 
-#primary-menu li :hover, #footer-menu li :hover {
+#primary-menu li :hover,
+#footer-menu li :hover {
     color: #E00000;
     transform: scale(1.1);
 }
@@ -271,6 +272,97 @@ a {
 }
 
 
+/* LIGHTBOX */
+
+.popup-overlay-lightbox {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    top: 0;
+    margin: 0;
+}
+
+.popup-lightbox {
+    /* max-width: 597px; */
+    max-height: 80vh;
+    max-width: 50vw;
+    border: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-weight: normal;
+    overflow: hidden;
+    background: white;
+    opacity: 1;
+}
+
+.post-navigation-lightbox {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+    font-family: Space Mono;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+.post-navigation-lightbox nav {
+    width: 100%;
+}
+
+.post-navigation-lightbox nav div div a {
+    display: flex;
+    align-items: center !important;
+    flex-direction: row-reverse !important;
+}
+
+.post-navigation-lightbox nav div div a p {
+    margin: 15px;
+    color: white;
+}
+
+.post-navigation-lightbox nav div div a img {
+    height: auto;
+    width: 25px;
+}
+
+.photo-info-lightbox {
+    display: flex;
+    justify-content: space-between;
+    max-width: 50vw;
+    width: 100%;
+    position: absolute;
+    bottom: 1em;
+    color: white;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.closecrosswhite img {
+    position: absolute;
+    top: 2em;
+    right: 2em;
+    height: 22px;
+    width: auto;
+}
+
+
+
+
 /* TEMPLATE POST SINGLE */
 
 .center {
@@ -369,7 +461,7 @@ a {
 
 .photos_apparentees h3 {
     margin-top: 60px;
-    margin-bottom: 16px;
+    margin-bottom: 40px;
     font-family: Space Mono;
     font-size: 18px;
     text-transform: uppercase;
@@ -451,11 +543,19 @@ a {
 
 .single_posts {
     display: flex;
-
     align-content: center;
     justify-content: space-between;
-    max-width: 1440px;
+    max-width: 1460px;
     margin-bottom: 90px;
+}
+
+.single_posts a {
+    width: 50%;
+    overflow: hidden;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .single_posts img {
@@ -463,6 +563,10 @@ a {
     width: 710px !important;
     object-fit: cover !important;
 
+}
+
+.posts_homepage {
+    margin: -10px;
 }
 
 /* HOME PAGE */
@@ -893,7 +997,7 @@ a {
 
     .photos_apparentees h3 {
         margin-top: 30px;
-        margin-bottom: 0;
+        margin-bottom: 30px;
     }
 
     .filters-and-sort {
@@ -916,4 +1020,9 @@ a {
     .photo-info {
         display: none;
     }
+
+    .single_posts a {
+        width: unset;
+    }
+
 }
