@@ -52,25 +52,26 @@
 
 	<div class="center">
 		<div class="posts_homepage">
-
-			<div class="">
+			<input type="hidden" name="page" value="1">
+			<div class="thumbnail-container-accueil">
 				<?php
 
 				$args = array(
 					'post_type' => 'photo',
-					'post_status' => 'publish',
+					// 'post_status' => 'publish',
 					'posts_per_page' => '8',
-					'orderby' => 'date',            
+					'orderby' => 'date',
 					'order' => 'DESC',
-					'paged' => 1,
+					// 'paged' => 1,
 				);
-				
+
 				$blog_posts = new WP_Query($args);
 				?>
 
 				<?php if ($blog_posts->have_posts()) : ?>
 					<div class="blog-posts">
 						<?php while ($blog_posts->have_posts()) : $blog_posts->the_post(); ?>
+
 							<a href="<?php echo get_permalink(); ?>">
 								<div class="photo-info">
 
@@ -96,14 +97,13 @@
 								</div>
 
 							</a>
-
 						<?php endwhile; ?>
+						<?php wp_reset_postdata(); // Rétablir les données de publication d'origine ?>
 					</div>
-					<div class="center">
-						<button class="loadmore">Charger plus</button>
-					</div>
-
 				<?php endif; ?>
+			</div>
+			<div class="center">
+				<button class="loadmore" id="load-more-posts">Charger plus</button>
 			</div>
 
 		</div>
