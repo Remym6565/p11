@@ -574,8 +574,36 @@ a {
 
 }
 
-.posts_homepage {
-    margin: -15px;
+
+.single-thumbnail-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    max-width: 1440px;
+    width: 100%;
+    flex-wrap: unset !important;
+}
+
+.single-thumbnail-container .container_photo {
+    width: 50% !important;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: 10px !important;
+}
+.single-thumbnail-container .container_photo .thumbnails a img {
+    height: 620px !important;
+    width: 710px !important;
+    object-fit: cover !important;
+}
+
+.single-thumbnail-container .container_photo .container_reference a {
+    width: 100%;
+}
+
+.single-thumbnail-container .container_photo .container_reference {
+    width: 700px !important;
 }
 
 /* HOME PAGE */

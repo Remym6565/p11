@@ -126,18 +126,11 @@ while (have_posts()) :
 
 						if ($my_query->have_posts()) : ?>
 
-
 							<div class="thumbnail-container single-thumbnail-container">
 								<?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
 									<?php get_template_part('template-parts/photo-block'); ?>
-									<!-- <a href="<?php echo get_permalink(); ?>">
-											<?php
-											the_post_thumbnail();
-											?>
-										</a> -->
 								<?php endwhile; ?>
 							</div>
-
 
 						<?php endif; ?>
 						<?php wp_reset_postdata(); ?>
