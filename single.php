@@ -95,11 +95,11 @@ while (have_posts()) :
 				<div class="width1440">
 					<h3>Vous aimerez aussi</h3>
 					<div class="posts_homepage">
-						
+
 						<?php
 						$categories = get_the_terms(get_the_ID(), 'categorie_photos');
-						
-						$current_category_slugs = array(); 
+
+						$current_category_slugs = array();
 						if ($categories) {
 							foreach ($categories as $category) {
 								$current_category_slugs[] = $category->slug;
@@ -126,17 +126,18 @@ while (have_posts()) :
 
 						if ($my_query->have_posts()) : ?>
 
-							<div class="">
-								<div class="single_posts">
-									<?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
-										<a href="<?php echo get_permalink(); ?>">
+
+							<div class="thumbnail-container single-thumbnail-container">
+								<?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
+									<?php get_template_part('template-parts/photo-block'); ?>
+									<!-- <a href="<?php echo get_permalink(); ?>">
 											<?php
 											the_post_thumbnail();
 											?>
-										</a>
-									<?php endwhile; ?>
-								</div>
+										</a> -->
+								<?php endwhile; ?>
 							</div>
+
 
 						<?php endif; ?>
 						<?php wp_reset_postdata(); ?>

@@ -37,7 +37,9 @@ add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 function enqueue_custom_script()
 {
     wp_enqueue_script('custom-script', get_stylesheet_directory_uri() . '/script.js');
+    wp_enqueue_script('single-script', get_stylesheet_directory_uri() . '/script-singlepost.js');
     wp_enqueue_script('ajax-script', get_stylesheet_directory_uri() . '/script-ajax.js');
+    wp_enqueue_script('lightbox-script', get_stylesheet_directory_uri() . '/script-lightbox.js');
     wp_enqueue_script('jquery', get_template_directory_uri() . '/libs/jquery-3.7.1.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_script');
@@ -52,82 +54,10 @@ add_action('after_setup_theme', 'register_my_menu');
 
 
 
-function blog_scripts()
+// Requete Ajax
+
+function enqueue_infinite_pagination_js()
 {
-    // Register the script
-    wp_register_script('custom-script', get_stylesheet_directory_uri() . '/js/custom.js', array('jquery'), false, true);
-
-    // Localize the script with new data
-    $script_data_array = array(
-        'ajaxurl' => admin_url('admin-ajax.php'),
-        'security' => wp_create_nonce('load_more_posts'),
-    );
-    wp_localize_script('custom-script', 'blog', $script_data_array);
-
-    // Enqueued script with localized data.
-    wp_enqueue_script('custom-script');
-}
-// add_action('wp_enqueue_scripts', 'blog_scripts');
-
-
-// add_action('wp_ajax_load_posts_by_ajax', 'load_posts_by_ajax_callback');
-// add_action('wp_ajax_nopriv_load_posts_by_ajax', 'load_posts_by_ajax_callback');
-
-
-function load_posts_by_ajax_callback()
-{
-    check_ajax_referer('load_more_posts', 'security');
-    $paged = $_POST['page'];
-    $args = array(
-        'post_type' => 'photo',
-        'post_status' => 'publish',
-        'posts_per_page' => '8',
-        'paged' => $paged,
-    );
-    $blog_posts = new WP_Query($args);
-?>
-
-    <?php if ($blog_posts->have_posts()) : ?>
-        <?php while ($blog_posts->have_posts()) : $blog_posts->the_post(); ?>
-            <a href="<?php echo get_permalink(); ?>">
-                <div class="photo-info">
-
-                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_fullscreen.png" alt="" id="full_icon">
-
-                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_eye.png" alt="" id="icon_eye">
-
-                    <div class="photo-info-leftandright">
-
-                        <div class="photo-info-left">
-                            <p><?php echo get_field('Référence'); ?></p>
-                        </div>
-                        <div class="photo-info-right">
-                            <p><?php echo get_field('Catégorie'); ?></p>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="background-black">
-                    <?php
-                    the_post_thumbnail();
-                    ?>
-                </div>
-
-            </a>
-        <?php endwhile; ?>
-        <?php
-    endif;
-
-    wp_die();
-}
-
-
-
-
-// <!-- AUTRE METHODE -->
-
-
-function enqueue_infinite_pagination_js() {
     wp_enqueue_script('infinite-pagination', get_template_directory_uri() . '/script-ajax.js', array('jquery'), '', true);
     // wp_enqueue_script('infinite-pagination', get_template_directory_uri() . '/js/infinite-pagination.js', array('jquery'), '', true);
     wp_localize_script('infinite-pagination', 'wp_data', array('ajax_url' => admin_url('admin-ajax.php')));
@@ -204,14 +134,15 @@ function load_more_posts()
     $custom_posts_query = new WP_Query($args_custom_posts); // Effectue une requête WordPress pour obtenir les publications personnalisées
 
     if ($custom_posts_query->have_posts()) {
+        $index = 1;
         while ($custom_posts_query->have_posts()) :
             $custom_posts_query->the_post();
             // Contenu | Article - Même format que dans "photo-block.php"
         ?>
             <div class="blog-posts custom-post-thumbnail">
-                
-                    <?php if (has_post_thumbnail()) : ?>
-                        <a href="<?php echo get_permalink(); ?>">
+
+                <?php if (has_post_thumbnail()) : ?>
+                    <!-- <a href="<?php echo get_permalink(); ?>">
                             <div class="photo-info">
                                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_fullscreen.png" alt="" id="full_icon">
 
@@ -234,11 +165,40 @@ function load_more_posts()
                                 ?>
                             </div>
 
-                        </a>
-                    <?php endif; ?>
-                
+                        </a> -->
+                    
+                    <div class="thumbnail-container">
+                        <?php get_template_part('template-parts/photo-block'); ?>
+                        <!-- <div class="container_photo" id="thumbnail_<?= $index ?>">
+                            <div class="container_reference" id="<?= the_id() ?>">
+                                <div class="icon_lightbox" data-index="<?= $index ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
+                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_fullscreen.png" alt="" id="">
+                                </div>
+
+                                <a href="<?php echo get_permalink(); ?>">
+                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_eye.png" alt="" id="icon_eye">
+                                </a>
+
+                                <div class="photo-info-leftandright">
+                                    <div class="photo-info-left">
+                                        <p><?php echo get_field('Référence'); ?></p>
+                                    </div>
+                                    <div class="photo-info-right">
+                                        <p><?php echo get_field('Catégorie'); ?></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="thumbnails" id="<?= the_id() ?>">
+                                <?php the_post_thumbnail(); ?>
+                            </div>
+                        </div> -->
+                    </div>
+                <?php endif; ?>
+
             </div>
 <?php
+            $index++;
         // Fin de la structure du contenu de l'article
         endwhile;
         wp_reset_postdata(); // Réinitialise les données des publications personnalisées

@@ -1,7 +1,5 @@
 window.addEventListener('DOMContentLoaded', function () {
 
-    
-
     // Menu burger
 
     const menubars = document.querySelector('.menu-bars');
@@ -24,14 +22,19 @@ window.addEventListener('DOMContentLoaded', function () {
         menuburger.classList.remove('open');
     });
 
-
-
-
     // Modale contact
 
     const contact = document.querySelector('.menu-item-50');
     const buttoncontact = document.querySelector('.button_contact');
     const popupoverlay = document.querySelector('.popup-overlay');
+
+    const closecrosswhitecontact = document.querySelector('.closecrosswhitecontact');
+    
+
+    closecrosswhitecontact.addEventListener('click', () => {
+        popupoverlay.classList.remove('popup');
+        console.log(closecrosswhitecontact);
+    });
 
     //version desktop
     contact.addEventListener('click', () => {
@@ -44,63 +47,127 @@ window.addEventListener('DOMContentLoaded', function () {
         popupoverlay.classList.add('popup');
     });
 
-    // Bouton contact sur un post 
-    buttoncontact.addEventListener('click', () => {
-        popupoverlay.classList.add('popup');
-    });
 
+    // Lightbox
+    // function reloadEvents() {
+    //     setTimeout(() =>  {
+    //         const iconlightbox = document.querySelectorAll('.icon_lightbox');
+    //         const lightbox = document.querySelector('.lightbox');
+    //         const iconprevious = document.querySelector('.lightbox__prev');
+    //         const iconnext = document.querySelector('.lightbox__next');
+    //         const closeligthbox = document.querySelector('.lightbox__close');
 
-    // Single post : change nav image
+    //         let photoIndex = 0;
+    //         iconlightbox.forEach(element => {
+    //             element.addEventListener('click', () => {
+    //                 console.log(element);
+    //                 const imglightboxcontainer = document.querySelector('.lightbox__container img');
+    //                 imglightboxcontainer.src = element.dataset.src;
 
-    const previousimage = document.querySelector('.photo_previous');
-    const nextimage = document.querySelector('.photo_next');
-    const arrowbefore = document.querySelector('.nav-previous');
-    const arrowafter = document.querySelector('.nav-next');
+    //                 document.querySelector(".photo_info_ref p").innerText = element.dataset.ref;
+    //                 document.querySelector(".photo_info_cat p").innerText = element.dataset.cat;
 
-    if (arrowbefore) {
-        arrowbefore.addEventListener('mouseover', () => {
-            previousimage.classList.remove('close');
-            nextimage.classList.add('close');
-        });
-    }
+    //                 photoIndex = parseInt(element.dataset.index);
 
-    if (arrowafter) {
-        arrowafter.addEventListener('mouseover', () => {
-            nextimage.classList.remove('close');
-            previousimage.classList.add('close');
-        });
-    }
+    //                 if (photoIndex == 1) iconprevious.classList.add('hidden');
+    //                 if (photoIndex == iconlightbox.length) iconnext.classList.add('hidden');
 
+    //                 lightbox.classList.toggle('open');
+    //             });
+    //         });
 
-    // Single post : input ref photo
+    //         iconprevious.addEventListener('click', () => {
+    //             const previousIndex = parseInt(photoIndex - 1);
+    //             const photoTarget = document.querySelector(`#thumbnail_${previousIndex} .thumbnails img`);
+    //             const infosTarget = document.querySelector(`#thumbnail_${previousIndex} .icon_lightbox`);
 
-    
-    let refvalue = document.getElementById('ref').innerHTML;
-    refvalue = refvalue.split(':')[1].trim();
+    //             document.querySelector(".photo_info_ref p").innerText = infosTarget.dataset.ref;
+    //             document.querySelector(".photo_info_cat p").innerText = infosTarget.dataset.cat;
 
-    const refphoto = document.querySelector('input[name="your-subject"]');
-    refphoto.value = refvalue;
-    
+    //             const imglightboxcontainer = document.querySelector('.lightbox__container img');
+    //             imglightboxcontainer.src = photoTarget.src;
 
+    //             photoIndex = previousIndex;
 
-    // Hover photo catalogue
+    //             if (photoIndex == 1) iconprevious.classList.add('hidden');
+    //             if (photoIndex < iconlightbox.length) iconnext.classList.remove('hidden');
+    //         });
 
-    // const fullicon = document.querySelector('#full_icon');
-    // console.log(fullicon);
+    //         iconnext.addEventListener('click', () => {
+    //             const nextIndex = parseInt(photoIndex + 1);
+    //             const photoTarget = document.querySelector(`#thumbnail_${nextIndex} .thumbnails img`);
+    //             const infosTarget = document.querySelector(`#thumbnail_${nextIndex} .icon_lightbox`);
 
+    //             document.querySelector(".photo_info_ref p").innerText = infosTarget.dataset.ref;
+    //             document.querySelector(".photo_info_cat p").innerText = infosTarget.dataset.cat;
 
-    // Lightbox (close)
+    //             const imglightboxcontainer = document.querySelector('.lightbox__container img');
+    //             imglightboxcontainer.src = photoTarget.src;
 
-    const closecrosswhite = document.querySelector('.closecross');
-    const popupoverlaylightbox = document.querySelector('.popup-overlay-lightbox');
-    
-    console.log(closecrosswhite); 
+    //             photoIndex = nextIndex;
 
-    // closecrosswhite.addEventListener('click', () => {
-    //     popupoverlaylightbox.classList.remove('open');
-        
+    //             if (photoIndex > 1) iconprevious.classList.remove('hidden');
+    //             if (photoIndex == iconlightbox.length) iconnext.classList.add('hidden');
+    //         });
+
+    //         closeligthbox.addEventListener('click', () => {
+    //             lightbox.classList.toggle('open');
+    //         });
+    //     }, 250)
+    // }
+
+    // reloadEvents();
+
+    // const filters = document.querySelectorAll(".filters-and-sort select");
+    // filters.forEach(element => {
+    //     element.addEventListener('change', reloadEvents);
     // });
-    // console.log(closecrosswhite);
+    
+    // const loadMore = document.querySelector("#load-more-posts");
+    // loadMore.addEventListener('click', reloadEvents);
+
+    
+    
+    
+
+
+
+    // // Single post : change nav image
+
+    // const previousimage = document.querySelector('.photo_previous');
+    // const nextimage = document.querySelector('.photo_next');
+    // const arrowbefore = document.querySelector('.nav-previous');
+    // const arrowafter = document.querySelector('.nav-next');
+
+    // if (arrowbefore) {
+    //     arrowbefore.addEventListener('mouseover', () => {
+    //         previousimage.classList.remove('close');
+    //         nextimage.classList.add('close');
+    //     });
+    // }
+
+    // if (arrowafter) {
+    //     arrowafter.addEventListener('mouseover', () => {
+    //         nextimage.classList.remove('close');
+    //         previousimage.classList.add('close');
+    //     });
+    // }
+
+
+    // // Single post : input ref photo
+
+    
+    // let refvalue = document.getElementById('ref').innerHTML;
+    // refvalue = refvalue.split(':')[1].trim();
+
+    // const refphoto = document.querySelector('input[name="your-subject"]');
+    // refphoto.value = refvalue;
+
+    // // Bouton contact sur un post 
+    // buttoncontact.addEventListener('click', () => {
+    //     popupoverlay.classList.add('popup');
+    // });
 
 
 })
+

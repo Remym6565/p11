@@ -2,28 +2,6 @@
 window.addEventListener('DOMContentLoaded', function () {
     jQuery(document).ready(function ($) {
 
-
-        // var page = 2;
-        // jQuery(function ($) {
-        //     $('body').on('click', '.loadmore', function () {
-        //         var data = {
-        //             'action': 'load_posts_by_ajax',
-        //             'page': page,
-        //             'security': blog.security
-        //         };
-
-        //         $.post(blog.ajaxurl, data, function (response) {
-        //             if ($.trim(response) != '') {
-        //                 $('.blog-posts').append(response);
-        //                 page++;
-        //             } else {
-        //                 $('.loadmore').hide();
-        //             }
-        //         });
-        //     });
-        // });
-
-
         let loading = false; // Indique si le chargement est en cours ou non
         const $loadMoreButton = $('#load-more-posts'); // Sélectionne le bouton "Charger plus"
         const $container = $('.thumbnail-container-accueil'); // Sélectionne le conteneur de vignettes
@@ -72,12 +50,13 @@ window.addEventListener('DOMContentLoaded', function () {
                             $container.html(txt); // Affiche un message si aucune réponse n'est trouvée
                         }
                     }
+                    
                 },
             });
-            // if (!loading) {
-            //     loading = true;
-            //     $loadMoreButton.text('Chargement en cours...'); // Change le texte du bouton en "Chargement en cours..."
-            // }
+            if (!loading) {
+                loading = true;
+                // $loadMoreButton.text('Chargement en cours...'); // Change le texte du bouton en "Chargement en cours..."
+            }
         }
 
         function recursive_change(selectId) {

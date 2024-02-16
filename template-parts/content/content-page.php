@@ -58,47 +58,27 @@
 
 				$args = array(
 					'post_type' => 'photo',
-					// 'post_status' => 'publish',
 					'posts_per_page' => '8',
 					'orderby' => 'date',
 					'order' => 'DESC',
-					// 'paged' => 1,
 				);
 
+				$index = 1;
+
 				$blog_posts = new WP_Query($args);
+
 				?>
 
 				<?php if ($blog_posts->have_posts()) : ?>
-					<div class="blog-posts">
+					<div class="thumbnail-container">
 						<?php while ($blog_posts->have_posts()) : $blog_posts->the_post(); ?>
-
-							<a href="<?php echo get_permalink(); ?>">
-								<div class="photo-info">
-
-									<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_fullscreen.png" alt="" id="full_icon">
-
-									<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_eye.png" alt="" id="icon_eye">
-
-									<div class="photo-info-leftandright">
-
-										<div class="photo-info-left">
-											<p><?php echo get_field('Référence'); ?></p>
-										</div>
-										<div class="photo-info-right">
-											<p><?php echo get_field('Catégorie'); ?></p>
-										</div>
-									</div>
-
-								</div>
-								<div class="background-black">
-									<?php
-									the_post_thumbnail();
-									?>
-								</div>
-
-							</a>
-						<?php endwhile; ?>
-						<?php wp_reset_postdata(); // Rétablir les données de publication d'origine ?>
+							<?php get_template_part('template-parts/photo-block'); ?>
+						<?php
+							$index++;
+						endwhile;
+						?>
+						<?php wp_reset_postdata();
+						?>
 					</div>
 				<?php endif; ?>
 			</div>
@@ -109,4 +89,4 @@
 		</div>
 
 	</div>
-</article><!-- #post-<?php the_ID(); ?> -->
+</article>
