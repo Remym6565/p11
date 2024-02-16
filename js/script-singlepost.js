@@ -31,7 +31,12 @@ window.addEventListener('DOMContentLoaded', function () {
     const refphoto = document.querySelector('input[name="your-subject"]');
     refphoto.value = refvalue;
 
+
     // Bouton contact sur un post 
+    
+    const buttoncontact = document.querySelector('.button_contact');
+    const popupoverlay = document.querySelector('.popup-overlay');
+    
     buttoncontact.addEventListener('click', () => {
         popupoverlay.classList.add('popup');
     });

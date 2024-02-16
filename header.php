@@ -78,7 +78,12 @@
             ?>
 
         </div>
+
     <?php endif; ?>
 
     <!-- Contenu de la page -->
     <main id="content" class="content">
+
+    <?php if (is_front_page()) : ?>
+        <?php get_template_part('template-parts/homepage'); ?>
+    <?php endif; ?>
