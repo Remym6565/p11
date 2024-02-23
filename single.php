@@ -94,7 +94,7 @@ while (have_posts()) :
 			<div class="photos_apparentees">
 				<div class="width1440">
 					<h3>Vous aimerez aussi</h3>
-					<div class="posts_homepage">
+					<div class="posts_homepage single_page">
 
 						<?php
 						$categories = get_the_terms(get_the_ID(), 'categorie_photos');
