@@ -5,28 +5,31 @@ if (!defined('ABSPATH')) exit;
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
 
-if ( !function_exists( 'chld_thm_cfg_locale_css' ) ):
-    function chld_thm_cfg_locale_css( $uri ){
-        if ( empty( $uri ) && is_rtl() && file_exists( get_template_directory() . '/rtl.css' ) )
+if (!function_exists('chld_thm_cfg_locale_css')) :
+    function chld_thm_cfg_locale_css($uri)
+    {
+        if (empty($uri) && is_rtl() && file_exists(get_template_directory() . '/rtl.css'))
             $uri = get_template_directory_uri() . '/rtl.css';
         return $uri;
     }
 endif;
-add_filter( 'locale_stylesheet_uri', 'chld_thm_cfg_locale_css' );
+add_filter('locale_stylesheet_uri', 'chld_thm_cfg_locale_css');
 
-if ( !function_exists( 'chld_thm_cfg_parent_css' ) ):
-    function chld_thm_cfg_parent_css() {
-        wp_enqueue_style( 'chld_thm_cfg_parent', trailingslashit( get_template_directory_uri() ) . 'style.css', array(  ) );
+if (!function_exists('chld_thm_cfg_parent_css')) :
+    function chld_thm_cfg_parent_css()
+    {
+        wp_enqueue_style('chld_thm_cfg_parent', trailingslashit(get_template_directory_uri()) . 'style.css', array());
     }
 endif;
-add_action( 'wp_enqueue_scripts', 'chld_thm_cfg_parent_css', 10 );
-         
-if ( !function_exists( 'child_theme_configurator_css' ) ):
-    function child_theme_configurator_css() {
-        wp_enqueue_style( 'chld_thm_cfg_child', trailingslashit( get_stylesheet_directory_uri() ) . 'style.css', array( 'chld_thm_cfg_parent' ) );
+add_action('wp_enqueue_scripts', 'chld_thm_cfg_parent_css', 10);
+
+if (!function_exists('child_theme_configurator_css')) :
+    function child_theme_configurator_css()
+    {
+        wp_enqueue_style('chld_thm_cfg_child', trailingslashit(get_stylesheet_directory_uri()) . 'style.css', array('chld_thm_cfg_parent'));
     }
 endif;
-add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css', 10 );
+add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
 
 // END ENQUEUE PARENT ACTION
 
@@ -73,21 +76,21 @@ add_action('wp_enqueue_scripts', 'enqueue_infinite_pagination_js');
 
 function load_more_posts()
 {
-    $page = $_GET['page']; // Récupère le numéro de page à charger à partir de la requête GET
+    $page = $_GET['page']; // on récupère le numéro de page à charger à partir de la requête GET
 
     $args_custom_posts = array(
-        'post_type' => 'photo', // Type de publication personnalisée à charger
-        'posts_per_page' => 8, // Nombre de publications à afficher par page
+        'post_type' => 'photo', 
+        'posts_per_page' => 8, 
     );
 
-    // Vérification des paramètres de catégorie et de format dans la requête GET
+    // on vérifie des paramètres de catégorie et de format dans la requête GET
     if (
         $_GET['category'] != NULL &&
         $_GET['category'] != 'ALL' &&
         $_GET['format'] != NULL &&
         $_GET['format'] != 'ALL'
     ) {
-        // Si à la fois la catégorie et le format sont spécifiés, nous créons une requête complexe (opérateur logique "ET")
+        // si à la fois la catégorie et le format sont spécifiés, on crée une requête complexe ( avec opérateur logique "ET")
         $args_custom_posts['tax_query'] = array(
             'relation' => 'AND', // Opérateur logique "ET" pour s'assurer que les deux requêtes sont satisfaites
             array(
@@ -102,12 +105,12 @@ function load_more_posts()
             )
         );
     } else {
-        // Si seule la catégorie est spécifiée
+        // si seulement la catégorie est spécifiée
         if (
             $_GET['category'] != NULL &&
             $_GET['category'] != 'ALL'
         ) {
-            // Crée une requête pour filtrer par catégorie
+            // on crée une requête pour filtrer par catégorie
             $args_custom_posts['tax_query'] = array(
                 array(
                     'taxonomy' => 'categorie_photos',
@@ -116,12 +119,12 @@ function load_more_posts()
                 )
             );
         }
-        // Si seul le format est spécifié
+        // si seulement le format est spécifié
         if (
             $_GET['format'] != NULL &&
             $_GET['format'] != 'ALL'
         ) {
-            // Crée une requête pour filtrer par format
+            // on crée une requête pour filtrer par format
             $args_custom_posts['tax_query'] = array(
                 array(
                     'taxonomy' => 'format',
@@ -131,11 +134,11 @@ function load_more_posts()
             );
         }
     }
-    $args_custom_posts['orderby'] = 'date'; // Trie les publications par date
-    $args_custom_posts['order'] = $_GET['dateSort'] != 'ALL' ? $_GET['dateSort'] : 'DESC'; // Ordonne par ordre descendant si le tri par date est spécifié
-    $args_custom_posts['paged'] = $page; // Gère la pagination en fonction du numéro de page
+    $args_custom_posts['orderby'] = 'date'; // on trie les publications par date
+    $args_custom_posts['order'] = $_GET['dateSort'] != 'ALL' ? $_GET['dateSort'] : 'DESC'; // on ordonne par ordre descendant si le tri par date est spécifié
+    $args_custom_posts['paged'] = $page; // on gère la pagination en fonction du numéro de page
 
-    $custom_posts_query = new WP_Query($args_custom_posts); // Effectue une requête WordPress pour obtenir les publications personnalisées
+    $custom_posts_query = new WP_Query($args_custom_posts); // on ffectue une requête WordPress pour obtenir les publications personnalisées
 
     if ($custom_posts_query->have_posts()) {
         $index = 1;
@@ -161,5 +164,5 @@ function load_more_posts()
     die();
 }
 
-add_action('wp_ajax_load_more_posts', 'load_more_posts'); // Associe la fonction 'load_more_posts' à l'action AJAX 'wp_ajax_load_more_posts'
+add_action('wp_ajax_load_more_posts', 'load_more_posts'); // on associe la fonction 'load_more_posts' à l'action AJAX 'wp_ajax_load_more_posts'
 add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts');
