@@ -24,11 +24,15 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Single post : input ref photo
 
+    let refvalue = document.getElementById('ref');
+    if (refvalue !==null) {
+        refvalue = refvalue.innerHTML;
+        refvalue = refvalue.split(':')[1].trim();
+    }
+  
     
-    let refvalue = document.getElementById('ref').innerHTML;
-    refvalue = refvalue.split(':')[1].trim();
 
-    const refphoto = document.querySelector('input[name="your-subject"]');
+    var refphoto = document.querySelector('input[name="your-subject"]');
     refphoto.value = refvalue;
 
 
@@ -37,9 +41,13 @@ window.addEventListener('DOMContentLoaded', function () {
     const buttoncontact = document.querySelector('.button_contact');
     const popupoverlay = document.querySelector('.popup-overlay');
     
-    buttoncontact.addEventListener('click', () => {
-        popupoverlay.classList.add('popup');
-    });
+
+    if (buttoncontact !==null) {
+        buttoncontact.addEventListener('click', () => {
+            popupoverlay.classList.add('popup');
+        });
+    }
+
 
 
 })

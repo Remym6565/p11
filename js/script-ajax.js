@@ -6,9 +6,14 @@ window.addEventListener('DOMContentLoaded', function () {
         const $loadMoreButton = $('#load-more-posts'); // Sélectionne le bouton "Charger plus"
         const $container = $('.thumbnail-container-accueil'); // Sélectionne le conteneur de vignettes
 
+        reloadLightbox();
+
         $loadMoreButton.on('click', function () {
             get_more_posts(true) // Appelle la fonction pour obtenir plus de publications
+            
         });
+
+
 
         function get_more_posts(load) {
             let inputPage = $('input[name="page"]');
@@ -40,6 +45,7 @@ window.addEventListener('DOMContentLoaded', function () {
                         $loadMoreButton.text('Charger plus'); // Remet le texte du bouton à "Charger plus"
                         inputPage.val(page); // Met à jour le numéro de page
                         loading = false; // Indique que le chargement est terminé
+                        reloadLightbox();
                     } else {
                         if (load) {
                             // let finpublication = 'Fin des publications';
@@ -67,14 +73,17 @@ window.addEventListener('DOMContentLoaded', function () {
 
         if ($('#category-filter').length) {
             recursive_change('category-filter'); // Applique la fonction de changement aux filtres de catégorie
+            reloadLightbox();
         }
 
         if ($('#format-filter').length) {
             recursive_change('format-filter'); // Applique la fonction de changement aux filtres de format
+            reloadLightbox();
         }
 
         if ($('#date-sort').length) {
             recursive_change('date-sort'); // Applique la fonction de changement aux filtres de tri par date
+            reloadLightbox();
         }
 
     })

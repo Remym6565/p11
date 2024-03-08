@@ -1,6 +1,7 @@
-<div class="container_photo" id="thumbnail_<?= $index ?>">
+
+<div class="container_photo" data-src="<?= get_the_post_thumbnail_url() ?>" data-ref="<?= get_field('Référence') ?>" data-cat="<?= get_field('Catégorie') ?>">
     <div class="container_reference" id="<?= the_id() ?>">
-        <div class="icon_lightbox" data-index="<?= $index ?>" data-src="<?= get_the_post_thumbnail_url() ?>" data-ref="<?= get_field('Référence') ?>" data-cat="<?= get_field('Catégorie') ?>">
+        <div class="icon_lightbox">
             <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_fullscreen.png" alt="" id="">
         </div>
 

@@ -5,23 +5,28 @@ if (!defined('ABSPATH')) exit;
 // BEGIN ENQUEUE PARENT ACTION
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
 
-if (!function_exists('chld_thm_cfg_locale_css')) :
-    function chld_thm_cfg_locale_css($uri)
-    {
-        if (empty($uri) && is_rtl() && file_exists(get_template_directory() . '/rtl.css'))
+if ( !function_exists( 'chld_thm_cfg_locale_css' ) ):
+    function chld_thm_cfg_locale_css( $uri ){
+        if ( empty( $uri ) && is_rtl() && file_exists( get_template_directory() . '/rtl.css' ) )
             $uri = get_template_directory_uri() . '/rtl.css';
         return $uri;
     }
 endif;
-add_filter('locale_stylesheet_uri', 'chld_thm_cfg_locale_css');
+add_filter( 'locale_stylesheet_uri', 'chld_thm_cfg_locale_css' );
 
-if (!function_exists('child_theme_configurator_css')) :
-    function child_theme_configurator_css()
-    {
-        wp_enqueue_style('chld_thm_cfg_child', trailingslashit(get_stylesheet_directory_uri()) . 'style.css', array('twenty-twenty-one-custom-color-overrides', 'twenty-twenty-one-style', 'twenty-twenty-one-style', 'twenty-twenty-one-print-style'));
+if ( !function_exists( 'chld_thm_cfg_parent_css' ) ):
+    function chld_thm_cfg_parent_css() {
+        wp_enqueue_style( 'chld_thm_cfg_parent', trailingslashit( get_template_directory_uri() ) . 'style.css', array(  ) );
     }
 endif;
-add_action('wp_enqueue_scripts', 'child_theme_configurator_css', 10);
+add_action( 'wp_enqueue_scripts', 'chld_thm_cfg_parent_css', 10 );
+         
+if ( !function_exists( 'child_theme_configurator_css' ) ):
+    function child_theme_configurator_css() {
+        wp_enqueue_style( 'chld_thm_cfg_child', trailingslashit( get_stylesheet_directory_uri() ) . 'style.css', array( 'chld_thm_cfg_parent' ) );
+    }
+endif;
+add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css', 10 );
 
 // END ENQUEUE PARENT ACTION
 
@@ -38,8 +43,8 @@ function enqueue_custom_script()
 {
     wp_enqueue_script('custom-script', get_stylesheet_directory_uri() . '/js/script.js');
     wp_enqueue_script('single-script', get_stylesheet_directory_uri() . '/js/script-singlepost.js');
-    wp_enqueue_script('ajax-script', get_stylesheet_directory_uri() . '/js/script-ajax.js');
     wp_enqueue_script('lightbox-script', get_stylesheet_directory_uri() . '/js/script-lightbox.js');
+    wp_enqueue_script('ajax-script', get_stylesheet_directory_uri() . '/js/script-ajax.js');
     wp_enqueue_script('jquery', get_template_directory_uri() . '/js/libs/jquery-3.7.1.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_script');
@@ -59,7 +64,6 @@ add_action('after_setup_theme', 'register_my_menu');
 function enqueue_infinite_pagination_js()
 {
     wp_enqueue_script('infinite-pagination', get_template_directory_uri() . '/script-ajax.js', array('jquery'), '', true);
-    // wp_enqueue_script('infinite-pagination', get_template_directory_uri() . '/js/infinite-pagination.js', array('jquery'), '', true);
     wp_localize_script('infinite-pagination', 'wp_data', array('ajax_url' => admin_url('admin-ajax.php')));
 }
 add_action('wp_enqueue_scripts', 'enqueue_infinite_pagination_js');
@@ -137,73 +141,22 @@ function load_more_posts()
         $index = 1;
         while ($custom_posts_query->have_posts()) :
             $custom_posts_query->the_post();
-            // Contenu | Article - Même format que dans "photo-block.php"
-        ?>
+?>
             <div class="blog-posts custom-post-thumbnail">
 
                 <?php if (has_post_thumbnail()) : ?>
-                    <!-- <a href="<?php echo get_permalink(); ?>">
-                            <div class="photo-info">
-                                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_fullscreen.png" alt="" id="full_icon">
 
-                                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_eye.png" alt="" id="icon_eye">
-
-                                <div class="photo-info-leftandright">
-
-                                    <div class="photo-info-left">
-                                        <p><?php echo get_field('Référence'); ?></p>
-                                    </div>
-                                    <div class="photo-info-right">
-                                        <p><?php echo get_field('Catégorie'); ?></p>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="background-black">
-                                <?php
-                                the_post_thumbnail();
-                                ?>
-                            </div>
-
-                        </a> -->
-                    
                     <div class="thumbnail-container">
                         <?php get_template_part('template-parts/photo-block'); ?>
-                        <!-- <div class="container_photo" id="thumbnail_<?= $index ?>">
-                            <div class="container_reference" id="<?= the_id() ?>">
-                                <div class="icon_lightbox" data-index="<?= $index ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
-                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_fullscreen.png" alt="" id="">
-                                </div>
-
-                                <a href="<?php echo get_permalink(); ?>">
-                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Icon_eye.png" alt="" id="icon_eye">
-                                </a>
-
-                                <div class="photo-info-leftandright">
-                                    <div class="photo-info-left">
-                                        <p><?php echo get_field('Référence'); ?></p>
-                                    </div>
-                                    <div class="photo-info-right">
-                                        <p><?php echo get_field('Catégorie'); ?></p>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="thumbnails" id="<?= the_id() ?>">
-                                <?php the_post_thumbnail(); ?>
-                            </div>
-                        </div> -->
                     </div>
                 <?php endif; ?>
 
             </div>
 <?php
             $index++;
-        // Fin de la structure du contenu de l'article
         endwhile;
-        wp_reset_postdata(); // Réinitialise les données des publications personnalisées
+        wp_reset_postdata();
     } else {
-        // Aucun autre article à charger
     }
     die();
 }

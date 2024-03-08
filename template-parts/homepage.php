@@ -49,7 +49,7 @@
 					'order' => 'DESC',
 				);
 
-				$index = 1;
+
 
 				$blog_posts = new WP_Query($args);
 
@@ -60,7 +60,6 @@
 						<?php while ($blog_posts->have_posts()) : $blog_posts->the_post(); ?>
 							<?php get_template_part('template-parts/photo-block'); ?>
 						<?php
-							$index++;
 						endwhile;
 						?>
 						<?php wp_reset_postdata();
